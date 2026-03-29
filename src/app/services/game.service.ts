@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RecommendationModel } from '../../models/recommendation.model';
@@ -7,9 +7,8 @@ import { RecommendationModel } from '../../models/recommendation.model';
 export class GameService {
   http = inject(HttpClient);
 
-  readonly apiUrl = 'http://localhost:8080/api/recommendations';
-
-  getRecommendation(slug: string): Observable<RecommendationModel> {
-    return this.http.get<RecommendationModel>(`${this.apiUrl}/${slug}`);
+  readonly apiUrl = 'http://localhost:8080/api/v1/games';
+  getRecommendation(name: string): Observable<RecommendationModel> {
+    return this.http.get<RecommendationModel>(this.apiUrl, { params: { name } });
   }
 }

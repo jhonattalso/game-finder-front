@@ -1,6 +1,7 @@
 export interface RecommendationModel {
-  gameName: string;
+  name: string;
+  rating: number;
+  ratingCounts: number;
+  backgroundImage: string;
   recommendation: string;
-  stars: string;
-  explanation: string;
 }

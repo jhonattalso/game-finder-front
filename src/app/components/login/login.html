@@ -1,0 +1,23 @@
+<div class="login-container">
+  <h2>Login - Game Finder</h2>
+
+  <form (ngSubmit)="efetuarLogin()">
+    <div>
+      <label>Usuário:</label>
+      <input type="text" name="username" [(ngModel)]="credentials.username" required>
+    </div>
+
+    <div>
+      <label>Senha:</label>
+      <input type="password" name="password" [(ngModel)]="credentials.password" required>
+    </div>
+
+    @if (errorMessage()) {
+      <p style="color: red;">{{ errorMessage() }}</p>
+    }
+
+    <button type="submit">Entrar</button>
+  </form>
+
+  <p>Não tem conta? <a routerLink="/register">Registe-se aqui</a></p>
+</div>

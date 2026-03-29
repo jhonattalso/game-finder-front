@@ -1,17 +1,34 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, output, model } from '@angular/core';
 
 @Component({
-  selector: 'game-card',
+  selector: 'app-game-card',
+  standalone: true,
   imports: [],
   templateUrl: './game-card.html',
 })
 export class GameCard {
-  gameName = input.required<string>();
+  // Requisito: Input
+  name = input.required<string>();
   recommendation = input.required<string>();
-  stars = input.required<string>();
+  rating = input.required<number>();
   explanation = input.required<string>();
 
+  // Requisito: Model (Sinal que permite alteração de fora e de dentro)
+  favorito = model<boolean>(false);
+
+  // Requisito: Output (Emissor de eventos moderno)
+  verDetalhes = output<string>();
+
+  // Requisito: Signal (via computed)
   tituloFormatado = computed(() => {
-    return `Análise de: ${this.gameName().toUpperCase()}`;
+    return `Análise de: ${this.name().toUpperCase()}`;
   });
+
+  toggleFavorito() {
+    this.favorito.set(!this.favorito());
+  }
+
+  notificarClique() {
+    this.verDetalhes.emit(this.name());
+  }
 }

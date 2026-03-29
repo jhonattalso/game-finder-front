@@ -1,19 +1,14 @@
-<div
-  class="p-6 border rounded-2xl bg-slate-200 w-72 cursor-pointer hover:shadow-lg transition-all duration-200 border-slate-300"
->
-  <h3 class="text-lg font-bold text-center text-slate-800 uppercase tracking-wide">
-    {{ gameName() }}
-  </h3>
+<div class="card">
+  <h3>{{ tituloFormatado() }}</h3>
+  <p><strong>Recomendação:</strong> {{ recommendation() }}</p>
+  <p><strong>Nota:</strong> {{ rating() }}</p>
+  <p>{{ explanation() }}</p>
 
-  <p class="text-2xl mt-2 text-center">
-    {{ stars() }}
-  </p>
+  <div class="actions">
+    <button (click)="toggleFavorito()">
+      {{ favorito() ? '❤️ Favoritado' : '🤍 Favoritar' }}
+    </button>
 
-  <p class="text-center mt-2 font-semibold text-indigo-600">
-    {{ recommendation() }}
-  </p>
-
-  <div class="mt-4 pt-4 border-t border-slate-300 text-sm text-slate-600 italic">
-    {{ explanation() }}
+    <button (click)="notificarClique()">Ver detalhes</button>
   </div>
 </div>

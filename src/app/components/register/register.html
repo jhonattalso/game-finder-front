@@ -1,0 +1,15 @@
+<div class="auth-box">
+  <h2>Criar Nova Conta</h2>
+  <form (ngSubmit)="efetuarRegistro()">
+    <input type="text" name="user" [(ngModel)]="userData.username" placeholder="Usuário" required>
+    <input type="password" name="pass" [(ngModel)]="userData.password" placeholder="Senha" required>
+
+    <button type="submit">Registar</button>
+  </form>
+
+  @if (message()) {
+    <p class="feedback">{{ message() }}</p>
+  }
+
+  <p>Já tem conta? <a routerLink="/login">Faça Login</a></p>
+</div>

@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>Game Finder - Recomendações</h1>
+
+  <div class="game-grid">
+    <div *ngFor="let jogo of jogos" class="game-item">
+      <h3>{{ jogo.nome }}</h3>
+      <button (click)="buscar(jogo.slug)">Ver Recomendação</button>
+
+      <app-game-card
+        *ngIf="recommendations()[jogo.slug]"
+        [name]="recommendations()[jogo.slug].name"
+        [recommendation]="recommendations()[jogo.slug].recommendation"
+        [rating]="recommendations()[jogo.slug].rating"
+        [explanation]="recommendations()[jogo.slug].recommendation"
+        (onClose)="fecharCard(jogo.slug)">
+      </app-game-card>
+    </div>
+  </div>
+</div>
