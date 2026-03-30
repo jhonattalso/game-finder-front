@@ -1,5 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, model, computed } from '@angular/core'; // Adicionado computed
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // Obrigatório para o model() no HTML
 import { GameService } from '../../services/game.service';
 import { GameCard } from '../../game-card/game-card';
 import { RecommendationModel } from '../../../models/recommendation.model';
@@ -7,15 +8,13 @@ import { RecommendationModel } from '../../../models/recommendation.model';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, GameCard],
+  imports: [CommonModule, GameCard, FormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
 export class Home {
+  filtro = model('');
   private gameService = inject(GameService);
-
-  // Requirement: Signal
-  recommendations = signal<Record<string, RecommendationModel>>({});
 
   jogos = [
     { nome: 'Elden Ring', slug: 'elden-ring' },
@@ -26,22 +25,23 @@ export class Home {
     { nome: 'The Lord of the Rings: Gollum', slug: 'the-lord-of-the-rings-gollum' },
   ];
 
+  jogosFiltrados = computed(() =>
+    this.jogos.filter(j => j.nome.toLowerCase().includes(this.filtro().toLowerCase()))
+  );
+
+  recommendations = signal<Record<string, RecommendationModel>>({});
+
   buscar(slug: string) {
     this.gameService.getRecommendation(slug).subscribe((res) => {
-      // Atualiza o Signal com a nova recomendação vinda do Back-end
-      this.recommendations.update((old) => ({
-        ...old,
-        [slug]: res,
-      }));
+      this.recommendations.update((old) => ({ ...old, [slug]: res }));
     });
   }
 
-
   fecharCard(slug: string) {
-  this.recommendations.update(old => {
-    const novoEstado = { ...old };
-    delete novoEstado[slug];
-    return novoEstado;
-  });
-}
+    this.recommendations.update(old => {
+      const novoEstado = { ...old };
+      delete novoEstado[slug];
+      return novoEstado;
+    });
+  }
 }

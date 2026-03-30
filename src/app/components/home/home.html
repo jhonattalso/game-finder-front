@@ -1,8 +1,13 @@
 <div class="container">
-  <h1>Game Finder - Recomendações</h1>
+  <div class="header">
+    <h1>Game Finder - Recomendações</h1>
+    <div class="search-box">
+      <input type="text" [(ngModel)]="filtro" placeholder="Filtrar jogos da lista...">
+    </div>
+  </div>
 
   <div class="game-grid">
-    <div *ngFor="let jogo of jogos" class="game-item">
+    <div *ngFor="let jogo of jogosFiltrados()" class="game-item">
       <h3>{{ jogo.nome }}</h3>
       <button (click)="buscar(jogo.slug)">Ver Recomendação</button>
 
