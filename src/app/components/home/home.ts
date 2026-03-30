@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms'; // Obrigatório para o model() no 
 import { GameService } from '../../services/game.service';
 import { GameCard } from '../../game-card/game-card';
 import { RecommendationModel } from '../../../models/recommendation.model';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { RecommendationModel } from '../../../models/recommendation.model';
   styleUrl: './home.css'
 })
 export class Home {
+  authService = inject(AuthService);
   filtro = model('');
   private gameService = inject(GameService);
 
@@ -28,6 +30,10 @@ export class Home {
   jogosFiltrados = computed(() =>
     this.jogos.filter(j => j.nome.toLowerCase().includes(this.filtro().toLowerCase()))
   );
+
+  logout() {
+    this.authService.logout();
+  }
 
   recommendations = signal<Record<string, RecommendationModel>>({});
 
