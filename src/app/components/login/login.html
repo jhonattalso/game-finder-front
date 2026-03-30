@@ -1,23 +1,55 @@
-<div class="login-container">
-  <h2>Login - Game Finder</h2>
+<div class="min-h-screen w-screen bg-slate-50 flex items-center justify-center p-6 font-sans m-0">
+  <div class="w-full max-w-md bg-white rounded-2xl p-10 shadow-sm border border-slate-100 transition-all">
 
-  <form (ngSubmit)="efetuarLogin()">
-    <div>
-      <label>Usuário:</label>
-      <input type="text" name="username" [(ngModel)]="credentials.username" required>
-    </div>
+    <header class="text-center mb-10">
+      <h2 class="text-3xl font-extrabold tracking-tight text-slate-950">Game Finder</h2>
+      <p class="text-slate-500 mt-2">Entre na sua conta para continuar</p>
+    </header>
 
-    <div>
-      <label>Senha:</label>
-      <input type="password" name="password" [(ngModel)]="credentials.password" required>
-    </div>
+    <form (ngSubmit)="efetuarLogin()" class="space-y-6">
+      <div class="space-y-2">
+        <label class="text-sm font-semibold text-slate-700 ml-1">Usuário</label>
+        <input
+          type="text"
+          name="username"
+          [(ngModel)]="credentials.username"
+          required
+          placeholder="Seu usuário"
+          class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all placeholder-slate-400"
+        >
+      </div>
 
-    @if (errorMessage()) {
-      <p style="color: red;">{{ errorMessage() }}</p>
-    }
+      <div class="space-y-2">
+        <label class="text-sm font-semibold text-slate-700 ml-1">Senha</label>
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="credentials.password"
+          required
+          placeholder="••••••••"
+          class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all placeholder-slate-400"
+        >
+      </div>
 
-    <button type="submit">Entrar</button>
-  </form>
+      @if (errorMessage()) {
+        <div class="bg-red-50 border border-red-100 text-red-600 text-xs font-medium px-4 py-3 rounded-lg animate-pulse">
+          {{ errorMessage() }}
+        </div>
+      }
 
-  <p>Não tem conta? <a routerLink="/register">Registe-se aqui</a></p>
+      <button
+        type="submit"
+        class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-all shadow-lg shadow-slate-200 active:scale-[0.98]"
+      >
+        Entrar
+      </button>
+    </form>
+
+    <footer class="mt-8 text-center">
+      <p class="text-sm text-slate-500">
+        Não tem conta?
+        <a routerLink="/register" class="text-slate-900 font-bold hover:underline underline-offset-4">Registre-se aqui</a>
+      </p>
+    </footer>
+  </div>
 </div>
