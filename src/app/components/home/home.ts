@@ -1,5 +1,6 @@
 import { Component, inject, signal, model, computed } from '@angular/core'; // Adicionado computed
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms'; // Obrigatório para o model() no HTML
 import { GameService } from '../../services/game.service';
 import { GameCard } from '../../game-card/game-card';
@@ -14,9 +15,10 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './home.css'
 })
 export class Home {
-  authService = inject(AuthService);
   filtro = model('');
+  authService = inject(AuthService);
   private gameService = inject(GameService);
+  private router = inject(Router);
 
   jogos = [
     { nome: 'Elden Ring', slug: 'elden-ring' },
@@ -33,6 +35,7 @@ export class Home {
 
   logout() {
     this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   recommendations = signal<Record<string, RecommendationModel>>({});

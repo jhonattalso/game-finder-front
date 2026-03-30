@@ -13,13 +13,13 @@ export class GameCard {
   rating = input.required<number>();
   explanation = input.required<string>();
 
-  // Requisito: Model (Sinal que permite alteração de fora e de dentro)
+  // Requisito: Model
   favorito = model<boolean>(false);
 
-  // Requisito: Output (Emissor de eventos moderno)
+  // Requisito: Output
   verDetalhes = output<string>();
 
-  // Requisito: Signal (via computed)
+  // Requisito: Signal
   tituloFormatado = computed(() => {
     return `Análise de: ${this.name().toUpperCase()}`;
   });

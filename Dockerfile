@@ -14,7 +14,6 @@ RUN npm run build --configuration=production
 FROM nginx:alpine
 
 # Copia os arquivos gerados no estágio anterior para o diretório do Nginx
-# Nota: O caminho 'dist/game-finder-front/browser' é o padrão do Angular 17+
 COPY --from=build /app/dist/game-finder-front/browser /usr/share/nginx/html
 
 # Expõe a porta 80 para acesso via navegador
